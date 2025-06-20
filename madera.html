@@ -39,15 +39,17 @@
   </audio>
 
   <div class="gallery">
-    <!-- First image toggles audio on/off -->
-    <img src="P6200525.JPG" alt="" onclick="
-      const audio = document.getElementById('maderaAudio');
-      if (audio.paused) {
-        audio.play().catch(e => console.log('Play error:', e));
-      } else {
-        audio.pause();
-      }
-    " />    " />
+  <!-- Hidden audio -->
+  <audio id="maderaAudio" preload="auto">
+    <source src="audiomadera.m4a" type="audio/mp4" />
+  
+  </audio>
+
+  <!-- Image grid -->
+  <div class="gallery">
+    <!-- Image that toggles audio -->
+    <img src="P6200525.JPG" alt="Play sound" onclick="toggleAudio()" />
+  
     <!-- Resto de las imágenes -->
     <img src="P6200526.JPG" alt="">
     <img src="P6200529.JPG" alt="">
