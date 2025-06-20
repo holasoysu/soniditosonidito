@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ciervo que se tatúa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Humano que se tatúa</title>
   <style>
     body {
       margin: 0;
@@ -12,133 +12,112 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       min-height: 100vh;
-      padding: 2rem;
+      padding: 1rem;
     }
 
     svg {
-      width: 200px;
+      width: 150px;
       margin-bottom: 2rem;
     }
 
     .question {
-      text-align: center;
-      margin-bottom: 2rem;
       display: none;
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
 
     .question.active {
       display: block;
     }
 
-    .question h2 {
+    .question p {
       margin-bottom: 1rem;
-      font-weight: normal;
     }
 
-    .answers button {
+    button {
+      display: block;
+      margin: 0.4rem auto;
       background: black;
       color: white;
       border: none;
-      padding: 0.5rem 1rem;
-      margin: 0.25rem;
+      padding: 0.4rem 1rem;
       cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-    }
-
-    .answers button:hover {
-      background: #333;
     }
 
     .tattoo {
       fill: black;
-      r: 4;
-    }
-
-    audio {
-      display: none;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
-
-  <!-- CIERVO SVG -->
-  <svg viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="20" fill="#999"/>
-    <circle cx="44" cy="45" r="2" fill="#000">
-      <animate attributeName="r" values="2;0.5;2" dur="3s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="35" cy="30" r="3" fill="#999"/> <!-- oreja izq -->
-    <circle cx="65" cy="30" r="3" fill="#999"/> <!-- oreja der -->
-    <!-- cuernos -->
-    <path d="M35 20 C30 10, 40 5, 37 15" stroke="black" stroke-width="1" fill="none"/>
-    <path d="M65 20 C70 10, 60 5, 63 15" stroke="black" stroke-width="1" fill="none"/>
-    <!-- tatuajes se añaden aquí -->
-    <g id="tattoos"></g>
+  <!-- Silueta humanoide con dos ojos -->
+  <svg viewBox="0 0 100 200">
+    <!-- Cabeza -->
+    <circle cx="50" cy="30" r="15" fill="gray" />
+    <!-- Ojos -->
+    <circle cx="45" cy="28" r="2" fill="black" />
+    <circle cx="55" cy="28" r="2" fill="black" />
+    <!-- Cuerpo -->
+    <rect x="35" y="45" width="30" height="60" fill="gray" />
+    <!-- Piernas -->
+    <rect x="38" y="105" width="6" height="20" fill="gray" />
+    <rect x="56" y="105" width="6" height="20" fill="gray" />
+    <!-- Brazos -->
+    <rect x="25" y="50" width="8" height="25" fill="gray" />
+    <rect x="67" y="50" width="8" height="25" fill="gray" />
+    <!-- Tatuajes (inicialmente ocultos) -->
+    <circle id="tattoo1" class="tattoo" cx="50" cy="60" r="2" visibility="hidden" />
+    <circle id="tattoo2" class="tattoo" cx="42" cy="50" r="2" visibility="hidden" />
   </svg>
 
-  <!-- PREGUNTA 1 -->
-  <div class="question active" id="q1">
-    <h2>¿Qué canción suena mientras saltas?</h2>
-    <div class="answers">
-      <button onclick="openLinkAndTattoo('https://www.youtube.com/watch?v=M9wo5N4lZS0')">flores en mi cora</button>
-      <button onclick="openLinkAndTattoo('https://www.youtube.com/watch?v=Jr4y9oVS8rk')">del cielo al suelo</button>
-      <button onclick="openLinkAndTattoo('https://www.youtube.com/watch?v=FpslVgJrty8')">ella se olvidó de mí</button>
-    </div>
+  <!-- Pregunta 1 -->
+  <div id="q1" class="question active">
+    <p>¿Qué canción suena mientras saltas?</p>
+    <button onclick="handleMusic('tattoo1', 'https://www.youtube.com/watch?v=M9wo5N4lZS0')">flores en mi cora</button>
+    <button onclick="handleMusic('tattoo1', 'https://www.youtube.com/watch?v=Jr4y9oVS8rk')">del cielo al suelo</button>
+    <button onclick="handleMusic('tattoo1', 'https://www.youtube.com/watch?v=FpslVgJrty8')">ella se olvidó de mí</button>
   </div>
 
-  <!-- PREGUNTA 2 -->
-  <div class="question" id="q2">
-    <h2>¿Qué sonido es una cierva?</h2>
-    <div class="answers">
-      <button onclick="playAudio('cierva1')">audio 1</button>
-      <button onclick="playAudio('cierva2')">audio 2</button>
-      <button onclick="playAudio('cierva3')">audio 3</button>
-    </div>
+  <!-- Pregunta 2 -->
+  <div id="q2" class="question">
+    <p>¿Qué sonido es una cierva?</p>
+    <button onclick="playAudio('cierva1.m4a', 'tattoo2')">audio 1</button>
+    <button onclick="playAudio('cierva2.m4a', 'tattoo2')">audio 2</button>
+    <button onclick="playAudio('cierva3.m4a', 'tattoo2')">audio 3</button>
   </div>
 
-  <!-- AUDIOS -->
-  <audio id="cierva1" src="cierva1.m4a"></audio>
-  <audio id="cierva2" src="cierva2.m4a"></audio>
-  <audio id="cierva3" src="cierva3.m4a"></audio>
+  <!-- Audios ocultos -->
+  <audio id="audio1" src="cierva1.m4a"></audio>
+  <audio id="audio2" src="cierva2.m4a"></audio>
+  <audio id="audio3" src="cierva3.m4a"></audio>
 
   <script>
-    const tattoosGroup = document.getElementById("tattoos");
-    const audios = {
-      cierva1: document.getElementById("cierva1"),
-      cierva2: document.getElementById("cierva2"),
-      cierva3: document.getElementById("cierva3")
-    };
+    const q1 = document.getElementById("q1");
+    const q2 = document.getElementById("q2");
 
-    function addTattoo() {
-      const cx = 40 + Math.random() * 20;
-      const cy = 40 + Math.random() * 20;
-      const tattoo = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      tattoo.setAttribute("class", "tattoo");
-      tattoo.setAttribute("cx", cx);
-      tattoo.setAttribute("cy", cy);
-      tattoosGroup.appendChild(tattoo);
+    function handleMusic(tattooId, url) {
+      document.getElementById(tattooId).setAttribute("visibility", "visible");
+      window.open(url, '_blank');
+      q1.classList.remove("active");
+      q2.classList.add("active");
     }
 
-    function openLinkAndTattoo(url) {
-      window.open(url, "_blank");
-      addTattoo();
-      document.getElementById("q1").classList.remove("active");
-      document.getElementById("q2").classList.add("active");
-    }
-
-    function playAudio(id) {
-      // Pausar todos antes de reproducir
-      for (const key in audios) {
-        audios[key].pause();
-        audios[key].currentTime = 0;
-      }
-      audios[id].play();
-      addTattoo();
+    function playAudio(src, tattooId) {
+      const audios = ["audio1", "audio2", "audio3"];
+      audios.forEach(id => {
+        const a = document.getElementById(id);
+        if (a.src.includes(src)) {
+          a.play();
+        } else {
+          a.pause();
+          a.currentTime = 0;
+        }
+      });
+      document.getElementById(tattooId).setAttribute("visibility", "visible");
     }
   </script>
-
 </body>
 </html>
