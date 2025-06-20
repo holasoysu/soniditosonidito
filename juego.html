@@ -24,7 +24,7 @@
 
     .question {
       display: none;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       text-align: center;
     }
 
@@ -50,25 +50,24 @@
       fill: black;
       opacity: 0.8;
     }
+
+    audio {
+      display: block;
+      margin: 0.5rem auto;
+    }
   </style>
 </head>
 <body>
-  <!-- Silueta humanoide con dos ojos -->
+  <!-- Humanoide -->
   <svg viewBox="0 0 100 200">
-    <!-- Cabeza -->
     <circle cx="50" cy="30" r="15" fill="gray" />
-    <!-- Ojos -->
     <circle cx="45" cy="28" r="2" fill="black" />
     <circle cx="55" cy="28" r="2" fill="black" />
-    <!-- Cuerpo -->
     <rect x="35" y="45" width="30" height="60" fill="gray" />
-    <!-- Piernas -->
     <rect x="38" y="105" width="6" height="20" fill="gray" />
     <rect x="56" y="105" width="6" height="20" fill="gray" />
-    <!-- Brazos -->
     <rect x="25" y="50" width="8" height="25" fill="gray" />
     <rect x="67" y="50" width="8" height="25" fill="gray" />
-    <!-- Tatuajes (inicialmente ocultos) -->
     <circle id="tattoo1" class="tattoo" cx="50" cy="60" r="2" visibility="hidden" />
     <circle id="tattoo2" class="tattoo" cx="42" cy="50" r="2" visibility="hidden" />
   </svg>
@@ -82,27 +81,23 @@
   </div>
 
   <!-- Pregunta 2 -->
-  <div class="audio-players">
-  <p><strong>Escucha los sonidos:</strong></p>
-  <audio controls>
-    <source src="cierva1.m4a" type="audio/mp4">
-    Tu navegador no soporta el audio.
-  </audio>
-  <audio controls>
-    <source src="cierva2.m4a" type="audio/mp4">
-    Tu navegador no soporta el audio.
-  </audio>
-  <audio controls>
-    <source src="cierva3.m4a" type="audio/mp4">
-    Tu navegador no soporta el audio.
-  </audio>
-</div>
-  <div class="question" id="question2">
-  <p>¿Qué sonido es una cierva?</p>
-  <button onclick="chooseCierva(1)">respuesta 1</button>
-  <button onclick="chooseCierva(2)">respuesta 2</button>
-  <button onclick="chooseCierva(3)">respuesta 3</button>
-</div>
+  <div id="q2" class="question">
+    <p><strong>Escucha los sonidos:</strong></p>
+    <audio id="audio1" controls>
+      <source src="cierva1.m4a" type="audio/mp4" />
+    </audio>
+    <audio id="audio2" controls>
+      <source src="cierva2.m4a" type="audio/mp4" />
+    </audio>
+    <audio id="audio3" controls>
+      <source src="cierva3.m4a" type="audio/mp4" />
+    </audio>
+    <p>¿Qué sonido es una cierva?</p>
+    <button onclick="chooseCierva(1)">audio 1</button>
+    <button onclick="chooseCierva(2)">audio 2</button>
+    <button onclick="chooseCierva(3)">audio 3</button>
+  </div>
+
   <script>
     const q1 = document.getElementById("q1");
     const q2 = document.getElementById("q2");
@@ -114,18 +109,9 @@
       q2.classList.add("active");
     }
 
-    function playAudio(src, tattooId) {
-      const audios = ["audio1", "audio2", "audio3"];
-      audios.forEach(id => {
-        const a = document.getElementById(id);
-        if (a.src.includes(src)) {
-          a.play();
-        } else {
-          a.pause();
-          a.currentTime = 0;
-        }
-      });
-      document.getElementById(tattooId).setAttribute("visibility", "visible");
+    function chooseCierva(choice) {
+      document.getElementById("tattoo2").setAttribute("visibility", "visible");
+      alert("Gracias por jugar 💘");
     }
   </script>
 </body>
