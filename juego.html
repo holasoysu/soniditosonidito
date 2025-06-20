@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ciervo que se tatúa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    svg {
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    .tattoo {
+      fill: black;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .tattoo.show {
+      opacity: 1;
+    }
+
+    .eye {
+      animation: blink 4s infinite;
+      transform-origin: center;
+    }
+
+    @keyframes blink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      95%, 98% { transform: scaleY(0.1); }
+    }
+
+    .question {
+      max-width: 500px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .answers button {
+      display: block;
+      margin: 0.5rem auto;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .answers button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ciervo SVG -->
+  <svg viewBox="0 0 200 200">
+    <!-- cuerpo -->
+    <path d="M60,120 Q70,80 90,80 Q120,80 130,120 Z" fill="#ccc"/>
+    <!-- cabeza -->
+    <circle cx="140" cy="80" r="10" fill="#ccc"/>
+    <!-- ojo -->
+    <circle cx="140" cy="80" r="2" fill="#000" class="eye"/>
+    
+    <!-- tatuajes -->
+    <circle id="tattoo1" class="tattoo" cx="75" cy="100" r="3" />
+    <circle id="tattoo2" class="tattoo" cx="90" cy="90" r="3" />
+    <circle id="tattoo3" class="tattoo" cx="110" cy="105" r="3" />
+    <circle id="tattoo4" class="tattoo" cx="135" cy="78" r="2" />
+    <circle id="tattoo5" class="tattoo" cx="100" cy="95" r="3" />
+    <circle id="tattoo6" class="tattoo" cx="85" cy="110" r="3" />
+  </svg>
+
+  <!-- Pregunta y respuestas -->
+  <div class="question" id="questionText">
+    ¿Qué canción suena mientras saltas?
+  </div>
+
+  <div class="answers" id="answers">
+    <button onclick="selectAnswer(1, 'https://www.youtube.com/watch?v=M9wo5N4lZS0')">flores en mi cora</button>
+    <button onclick="selectAnswer(2, 'https://www.youtube.com/watch?v=Jr4y9oVS8rk')">del cielo al suelo</button>
+    <button onclick="selectAnswer(3, 'https://www.youtube.com/watch?v=FpslVgJrty8')">ella se olvidó de mí</button>
+  </div>
+
+  <!-- Audios pregunta 2 -->
+  <audio id="audio1" src="cierva1.m4a" preload="auto"></audio>
+  <audio id="audio2" src="cierva2.m4a" preload="auto"></audio>
+  <audio id="audio3" src="cierva3.m4a" preload="auto"></audio>
+
+  <script>
+    let currentStep = 1;
+
+    function selectAnswer(choice, linkOrAudio) {
+      // Mostrar tatuaje
+      document.getElementById(`tattoo${choice}`).classList.add('show');
+
+      if (currentStep === 1) {
+        // Abrir canción en nueva pestaña
+        window.open(linkOrAudio, '_blank');
+
+        // Pasar a la siguiente pregunta
+        document.getElementById("questionText").innerText = "¿Qué sonido es una cierva?";
+        document.getElementById("answers").innerHTML = `
+          <button onclick="playAudio(1)">audio 1</button>
+          <button onclick="playAudio(2)">audio 2</button>
+          <button onclick="playAudio(3)">audio 3</button>
+        `;
+        currentStep = 2;
+
+      } else if (currentStep === 2) {
+        // reproducir audio
+        document.getElementById(`audio${choice}`).play();
+      }
+    }
+
+    function playAudio(num) {
+      // reproducir
+      const audio = document.getElementById(`audio${num}`);
+      audio.currentTime = 0;
+      audio.play();
+      // mostrar otro tatuaje
+      document.getElementById(`tattoo${num + 3}`).classList.add('show');
+    }
+  </script>
+</body>
+</html>
