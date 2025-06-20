@@ -12,8 +12,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
       padding: 1rem;
     }
 
@@ -67,72 +65,88 @@
 <body>
 
   <!-- Ciervo SVG -->
-  <svg viewBox="0 0 200 200">
-    <!-- cuerpo -->
-    <path d="M60,120 Q70,80 90,80 Q120,80 130,120 Z" fill="#ccc"/>
+  <svg id="ciervo" viewBox="0 0 200 150">
+    <!-- cuerpo (simplificado con forma animal) -->
+    <ellipse cx="100" cy="100" rx="50" ry="30" fill="#ccc" />
+    <rect x="75" y="120" width="10" height="30" fill="#ccc" />
+    <rect x="115" y="120" width="10" height="30" fill="#ccc" />
+    <!-- cuello -->
+    <rect x="120" y="70" width="15" height="20" fill="#ccc" />
     <!-- cabeza -->
-    <circle cx="140" cy="80" r="10" fill="#ccc"/>
+    <circle cx="135" cy="65" r="10" fill="#ccc" />
+    <!-- oreja -->
+    <polygon points="142,55 148,50 140,60" fill="#ccc" />
     <!-- ojo -->
-    <circle cx="140" cy="80" r="2" fill="#000" class="eye"/>
-    
-    <!-- tatuajes -->
-    <circle id="tattoo1" class="tattoo" cx="75" cy="100" r="3" />
-    <circle id="tattoo2" class="tattoo" cx="90" cy="90" r="3" />
-    <circle id="tattoo3" class="tattoo" cx="110" cy="105" r="3" />
-    <circle id="tattoo4" class="tattoo" cx="135" cy="78" r="2" />
-    <circle id="tattoo5" class="tattoo" cx="100" cy="95" r="3" />
-    <circle id="tattoo6" class="tattoo" cx="85" cy="110" r="3" />
+    <circle cx="136" cy="65" r="2" fill="#000" class="eye"/>
+
+    <!-- tatuajes (creados dinámicamente en JS) -->
   </svg>
 
-  <!-- Pregunta y respuestas -->
+  <!-- Pregunta -->
   <div class="question" id="questionText">
     ¿Qué canción suena mientras saltas?
   </div>
 
+  <!-- Respuestas -->
   <div class="answers" id="answers">
     <button onclick="selectAnswer(1, 'https://www.youtube.com/watch?v=M9wo5N4lZS0')">flores en mi cora</button>
     <button onclick="selectAnswer(2, 'https://www.youtube.com/watch?v=Jr4y9oVS8rk')">del cielo al suelo</button>
     <button onclick="selectAnswer(3, 'https://www.youtube.com/watch?v=FpslVgJrty8')">ella se olvidó de mí</button>
   </div>
 
-  <!-- Audios pregunta 2 -->
+  <!-- Audios -->
   <audio id="audio1" src="cierva1.m4a" preload="auto"></audio>
   <audio id="audio2" src="cierva2.m4a" preload="auto"></audio>
   <audio id="audio3" src="cierva3.m4a" preload="auto"></audio>
 
   <script>
     let currentStep = 1;
+    const audios = [
+      document.getElementById('audio1'),
+      document.getElementById('audio2'),
+      document.getElementById('audio3')
+    ];
 
-    function selectAnswer(choice, linkOrAudio) {
-      // Mostrar tatuaje
-      document.getElementById(`tattoo${choice}`).classList.add('show');
+    function showTattoo() {
+      const svg = document.getElementById("ciervo");
+      const cx = Math.random() * 80 + 60; // zona cuerpo
+      const cy = Math.random() * 40 + 80;
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", cx);
+      circle.setAttribute("cy", cy);
+      circle.setAttribute("r", 3);
+      circle.setAttribute("class", "tattoo show");
+      svg.appendChild(circle);
+    }
+
+    function selectAnswer(choice, link) {
+      showTattoo();
 
       if (currentStep === 1) {
-        // Abrir canción en nueva pestaña
-        window.open(linkOrAudio, '_blank');
+        window.open(link, "_blank");
 
-        // Pasar a la siguiente pregunta
+        // ir a segunda pregunta
         document.getElementById("questionText").innerText = "¿Qué sonido es una cierva?";
         document.getElementById("answers").innerHTML = `
-          <button onclick="playAudio(1)">audio 1</button>
-          <button onclick="playAudio(2)">audio 2</button>
-          <button onclick="playAudio(3)">audio 3</button>
+          <button onclick="playAudio(0)">audio 1</button>
+          <button onclick="playAudio(1)">audio 2</button>
+          <button onclick="playAudio(2)">audio 3</button>
         `;
         currentStep = 2;
-
-      } else if (currentStep === 2) {
-        // reproducir audio
-        document.getElementById(`audio${choice}`).play();
       }
     }
 
-    function playAudio(num) {
-      // reproducir
-      const audio = document.getElementById(`audio${num}`);
-      audio.currentTime = 0;
-      audio.play();
-      // mostrar otro tatuaje
-      document.getElementById(`tattoo${num + 3}`).classList.add('show');
+    function playAudio(index) {
+      // parar todos
+      audios.forEach((audio, i) => {
+        if (i !== index) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+      // reproducir el elegido
+      audios[index].play();
+      showTattoo();
     }
   </script>
 </body>
