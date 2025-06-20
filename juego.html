@@ -1,159 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ciervo animado</title>
-<style>
-  body {
-    background:#f2f2f2;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-  }
-  .ciervo {
-    position:relative;
-    width:180px;
-    height:200px;
-    background:#b88656;
-    border-radius:55% 55% 40% 40%;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juego del ciervo</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Courier, monospace;
+      text-align: center;
+      margin: 0;
+      padding: 2rem;
+    }
 
-  .cuerno {
-    position:absolute;
-    width:10px;
-    height:60px;
-    background:#d3d3d3;
-    top:-55px;
-    border-radius:5px;
-  }
-  .cuerno.izq { left:45px; transform:rotate(-20deg); }
-  .cuerno.der { right:45px; transform:rotate(20deg); }
+    svg {
+      width: 120px;
+      margin: 0 auto 2rem;
+      display: block;
+    }
 
-  .oreja {
-    position:absolute;
-    width:30px;
-    height:50px;
-    background:#b88656;
-    top:-15px;
-    border-radius:50% 50% 0 0;
-  }
-  .oreja.izq { left:15px; transform:rotate(-20deg); }
-  .oreja.der { right:15px; transform:rotate(20deg); }
+    .question {
+      margin: 1.5rem 0 1rem;
+      font-size: 1rem;
+    }
 
-  .ojo {
-    position:absolute;
-    width:20px;
-    height:20px;
-    background:#fff;
-    border-radius:50%;
-    overflow:hidden;
-    top:75px;
-  }
-  .ojo::before {
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:#000;
-    border-radius:50%;
-    top:4px;
-  }
-  .ojo::after {
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:#b88656;
-    border-radius:50%;
-    top:0;
-    left:0;
-    animation: parpadear 5s infinite;
-    transform-origin:center top;
-  }
-  .ojo.izq { left:40px; }
-  .ojo.der { right:40px; }
+    .option {
+      display: block;
+      margin: 0.3rem auto;
+      background: black;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
 
-  @keyframes parpadear {
-    0%,92%,100% { transform:scaleY(0); }
-    94%,96% { transform:scaleY(1); }
-  }
-
-  .nariz {
-    position:absolute;
-    width:20px;
-    height:15px;
-    background:#ffdddd;
-    border-radius:50%;
-    bottom:60px;
-    left:calc(50% - 10px);
-  }
-</style>
+    .tattoo {
+      fill: black;
+    }
+  </style>
 </head>
 <body>
-  <div class="ciervo">
-    <div class="cuerno izq"></div>
-    <div class="cuerno der"></div>
-    <div class="oreja izq"></div>
-    <div class="oreja der"></div>
-    <div class="ojo izq"></div>
-    <div class="ojo der"></div>
-    <div class="nariz"></div>
-  </div>
-</body>
-</html>
 
-  <div class="pregunta" id="pregunta1">
-    <p>¿Qué canción suena mientras saltas?</p>
-    <button class="opcion" onclick="responder1('flores')">flores en mi cora</button>
-    <button class="opcion" onclick="responder1('cielo')">del cielo al suelo</button>
-    <button class="opcion" onclick="responder1('olvido')">ella se olvidó de mí</button>
-  </div>
+  <!-- Ciervo SVG inspirado en la silueta -->
+  <svg id="deer" viewBox="0 0 200 200">
+    <path d="M100 10
+             C90 30, 110 30, 100 50
+             C80 80, 120 80, 100 130
+             C90 150, 110 150, 100 170
+             C80 150, 120 150, 100 130
+             C80 100, 120 100, 100 50
+             C90 30, 110 30, 100 10
+             Z" fill="gray" />
+    <circle id="eye" cx="110" cy="40" r="5" fill="black" />
+  </svg>
 
-  <div class="pregunta" id="pregunta2" style="display: none;">
-    <p>¿Qué sonido es una cierva?</p>
-    <button class="opcion" onclick="reproducir('cierva1')">a. sonido 1</button>
-    <button class="opcion" onclick="reproducir('cierva2')">b. sonido 2</button>
-    <button class="opcion" onclick="reproducir('cierva3')">c. sonido 3</button>
+  <div class="question">
+    ¿Qué canción suena mientras saltas?
   </div>
+  <button class="option" onclick="addTattoo(); window.open('https://www.youtube.com/watch?v=M9wo5N4lZS0', '_blank')">flores en mi cora</button>
+  <button class="option" onclick="addTattoo(); window.open('https://www.youtube.com/watch?v=Jr4y9oVS8rk', '_blank')">del cielo al suelo</button>
+  <button class="option" onclick="addTattoo(); window.open('https://www.youtube.com/watch?v=FpslVgJrty8', '_blank')">ella se olvidó de mí</button>
 
+  <div class="question">
+    ¿Qué sonido es una cierva?
+  </div>
   <audio id="cierva1" src="cierva1.m4a"></audio>
   <audio id="cierva2" src="cierva2.m4a"></audio>
   <audio id="cierva3" src="cierva3.m4a"></audio>
+  <button class="option" onclick="playOnly('cierva1'); addTattoo()">respuesta 1</button>
+  <button class="option" onclick="playOnly('cierva2'); addTattoo()">respuesta 2</button>
+  <button class="option" onclick="playOnly('cierva3'); addTattoo()">respuesta 3</button>
 
   <script>
-    function responder1(respuesta) {
-      const ciervo = document.getElementById('ciervo');
-      const tatuaje = document.createElement('div');
-      tatuaje.className = 'tatuaje';
-      tatuaje.style.top = Math.random() * 100 + 'px';
-      tatuaje.style.left = Math.random() * 80 + 'px';
-      ciervo.appendChild(tatuaje);
+    // Parpadeo del ojo
+    setInterval(() => {
+      const eye = document.getElementById('eye');
+      eye.setAttribute('r', eye.getAttribute('r') === '5' ? '0.5' : '5');
+    }, 1500);
 
-      document.getElementById('pregunta1').style.display = 'none';
-      document.getElementById('pregunta2').style.display = 'block';
-
-      if (respuesta === 'flores') {
-        window.open('https://www.youtube.com/watch?v=M9wo5N4lZS0&list=RDM9wo5N4lZS0&start_radio=1', '_blank');
-      } else if (respuesta === 'cielo') {
-        window.open('https://www.youtube.com/watch?v=Jr4y9oVS8rk&list=RDJr4y9oVS8rk&start_radio=1', '_blank');
-      } else if (respuesta === 'olvido') {
-        window.open('https://www.youtube.com/watch?v=FpslVgJrty8&list=RDFpslVgJrty8&start_radio=1', '_blank');
-      }
+    // Añadir tatuaje
+    function addTattoo() {
+      const svg = document.getElementById('deer');
+      const tattoo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      tattoo.setAttribute('class', 'tattoo');
+      tattoo.setAttribute('cx', 80 + Math.random() * 40);
+      tattoo.setAttribute('cy', 60 + Math.random() * 80);
+      tattoo.setAttribute('r', 2 + Math.random() * 2);
+      svg.appendChild(tattoo);
     }
 
-    function reproducir(id) {
-      const audios = document.querySelectorAll('audio');
-      audios.forEach(audio => {
-        if (audio.id === id) {
-          audio.play();
+    // Reproducir solo un audio a la vez
+    function playOnly(id) {
+      ['cierva1', 'cierva2', 'cierva3'].forEach(name => {
+        const el = document.getElementById(name);
+        if (name === id) {
+          el.currentTime = 0;
+          el.play();
         } else {
-          audio.pause();
-          audio.currentTime = 0;
+          el.pause();
         }
       });
     }
   </script>
+
 </body>
 </html>
