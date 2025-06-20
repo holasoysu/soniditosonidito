@@ -1,43 +1,45 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Madera</title>
+  <title>Wood Gallery</title>
   <style>
     body {
       margin: 0;
       background-color: white;
+      font-family: sans-serif;
     }
 
     audio {
       display: none;
     }
 
-    .galeria {
+    .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 0.5rem;
       padding: 0.5rem;
     }
 
-    .galeria img {
+    .gallery img {
       width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
+      max-height: 300px;
+      object-fit: cover;
       border: 1px solid #ccc;
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <!-- audio oculto que se reproduce automáticamente en bucle -->
+  <!-- Hidden audio, autoplay and loop -->
   <audio autoplay loop>
     <source src="audiomadera.m4a" type="audio/mp4" />
   </audio>
 
-  <div class="galeria">
+  <!-- Image gallery -->
+  <div class="gallery">
     <img src="P6200525.JPG" alt="">
     <img src="P6200526.JPG" alt="">
     <img src="P6200529.JPG" alt="">
