@@ -11,90 +11,35 @@
       text-align: center;
       padding: 2rem;
     }
+<style>
+  .ciervo {
+    position: relative;
+    margin: 2rem auto;
+    width: 100px;
+    height: 120px;
+    background-color: #ccc;
+    border-radius: 50% 50% 40% 40% / 50% 50% 30% 30%;
+  }
 
-    .ciervo {
-      position: relative;
-      margin: 2rem auto;
-      width: 100px;
-      height: 120px;
-      background-color: #ccc;
-      border-radius: 50% 50% 40% 40% / 50% 50% 30% 30%;
-    }
+  .cuerno { ... }
+  .oreja  { ... }
 
-    .cuerno {
-      position: absolute;
-      width: 10px;
-      height: 30px;
-      background-color: #444;
-      top: -20px;
-    }
-    .cuerno.izq {
-      left: 15px;
-      transform: rotate(-30deg);
-    }
-    .cuerno.der {
-      right: 15px;
-      transform: rotate(30deg);
-    }
+  .ojo {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+    top: 30px;
+    left: 45px;
+    animation: parpadear 5s infinite;  /* El parpadeo */
+  }
 
-    .oreja {
-      position: absolute;
-      width: 15px;
-      height: 25px;
-      background-color: #bbb;
-      top: 0;
-    }
-    .oreja.izq {
-      left: -10px;
-      border-radius: 50% 0 50% 50%;
-    }
-    .oreja.der {
-      right: -10px;
-      border-radius: 0 50% 50% 50%;
-    }
-
-    .ojo {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: black;
-      border-radius: 50%;
-      top: 30px;
-      left: 45px;
-      animation: parpadear 5s infinite;
-    }
-
-    @keyframes parpadear {
-      0%, 95%, 100% { height: 10px; }
-      97% { height: 2px; }
-    }
-
-    .tatuaje {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background-color: black;
-      border-radius: 50%;
-    }
-
-    .pregunta {
-      margin-top: 3rem;
-      font-size: 1rem;
-    }
-
-    .opcion {
-      display: block;
-      margin: 1rem auto;
-      padding: 0.5rem 1rem;
-      background-color: black;
-      color: white;
-      font-family: 'Courier New', monospace;
-      border: none;
-      cursor: pointer;
-      width: fit-content;
-    }
-  </style>
-</head>
+  @keyframes parpadear {
+    0%, 95%, 100% { height: 10px; }
+    97% { height: 2px; }              /* Breve cierre del ojo */
+  }
+</style>
 <body>
   <div class="ciervo" id="ciervo">
     <div class="cuerno izq"></div>
@@ -103,6 +48,7 @@
     <div class="oreja der"></div>
     <div class="ojo"></div>
   </div>
+</body>
 
   <div class="pregunta" id="pregunta1">
     <p>¿Qué canción suena mientras saltas?</p>
