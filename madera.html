@@ -31,12 +31,17 @@
     }
   </style>
 </head>
+  <script>
+  function toggleAudio() {
+    const audio = document.getElementById('maderaAudio');
+    if (audio.paused) {
+      audio.play().catch(e => console.log("Playback blocked:", e));
+    } else {
+      audio.pause();
+    }
+  }
+</script>
 <body>
-
- <!-- Hidden audio element -->
-  <audio id="maderaAudio">
-    <source src="audiomadera.m4a" type="audio/m4a" />
-  </audio>
 
   <div class="gallery">
   <!-- Hidden audio -->
