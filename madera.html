@@ -3,44 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wood Gallery</title>
+  <title>Madera</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       background-color: white;
-      font-family: sans-serif;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2px;
+      padding: 2px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
     }
 
     audio {
       display: none;
     }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0.5rem;
-      padding: 0.5rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border: 1px solid #ccc;
-      display: block;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Hidden audio, autoplay and loop -->
-  <audio autoplay loop>
+  <!-- Audio oculto que se activa al hacer clic -->
+  <audio id="maderaAudio">
     <source src="audiomadera.m4a" type="audio/mp4" />
   </audio>
 
-  <!-- Image gallery -->
   <div class="gallery">
-    <img src="P6200525.JPG" alt="">
+    <!-- Imagen que activa el audio -->
+    <img src="P6200525.JPG" alt="" onclick="document.getElementById('maderaAudio').play()" />
+
+    <!-- Resto de las imágenes -->
     <img src="P6200526.JPG" alt="">
     <img src="P6200529.JPG" alt="">
     <img src="P6200534.JPG" alt="">
