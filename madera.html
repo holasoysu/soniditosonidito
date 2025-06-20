@@ -33,15 +33,19 @@
 </head>
 <body>
 
-  <!-- Audio oculto que se activa al hacer clic -->
+  <!-- Hidden audio that plays on image click -->
   <audio id="maderaAudio">
-    <source src="audiomadera.m4a" type="audio/mp4" />
+    <source src="audiomadera.m4a" type="audio/m4a" />
   </audio>
 
   <div class="gallery">
-    <!-- Imagen que activa el audio -->
-    <img src="P6200525.JPG" alt="" onclick="document.getElementById('maderaAudio').play()" />
-
+    <!-- First image triggers audio -->
+    <img src="P6200525.JPG" alt="" onclick="
+      const audio = document.getElementById('maderaAudio');
+      if (audio.paused) {
+        audio.play().catch(e => console.log('Audio play blocked:', e));
+      }
+    " />
     <!-- Resto de las imágenes -->
     <img src="P6200526.JPG" alt="">
     <img src="P6200529.JPG" alt="">
