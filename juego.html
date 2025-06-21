@@ -101,9 +101,27 @@
   <div class="question" id="q5">
     <p>5. Estás en tu habitación y eres...</p>
     <div class="answers">
-      <button onclick="endGame()">1. Un cable</button>
-      <button onclick="endGame()">2. Una maceta</button>
-      <button onclick="endGame()">3. Un mechero</button>
+      <button onclick="nextQuestion()">1. Un cable</button>
+      <button onclick="nextQuestion()">2. Una maceta</button>
+      <button onclick="nextQuestion()">3. Un mechero</button>
+    </div>
+  </div>
+
+  <div class="question" id="q6">
+    <p>6. En oración, eres...</p>
+    <div class="answers">
+      <button onclick="nextQuestion()">1. Soy guapa al natu</button>
+      <button onclick="nextQuestion()">2. No pasa nada, bebé</button>
+      <button onclick="nextQuestion()">3. OMG, ¿qué hicisteis?</button>
+    </div>
+  </div>
+
+  <div class="question" id="q7">
+    <p>7. Tú continuarías esto: "Y si quieres te llamo para ir a la calle y te dejo coments como..."</p>
+    <div class="answers">
+      <button onclick="endGame()">1. You are my sunshine</button>
+      <button onclick="endGame()">2. Me siento en batalla</button>
+      <button onclick="endGame()">3. No continuaría</button>
     </div>
   </div>
 
@@ -126,7 +144,6 @@
       alert("Fin del juego. Pronto definiremos el resultado según tus elecciones.");
     }
 
-    // ANIMACIÓN GLITCH EN CANVAS
     const canvas = document.getElementById('glitchCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
