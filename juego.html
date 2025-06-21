@@ -21,17 +21,6 @@
       z-index: -1;
     }
 
-    .question {
-      position: relative;
-      z-index: 10;
-      padding: 2em;
-      display: none;
-    }
-
-    .question.active {
-      display: block;
-    }
-
     .start-screen {
       position: relative;
       z-index: 10;
@@ -39,7 +28,7 @@
       text-align: center;
     }
 
-    .answers button, .start-button {
+    .start-button, .answers button {
       display: block;
       margin: 1em auto;
       background: none;
@@ -48,6 +37,17 @@
       padding: 0.75em 1.5em;
       cursor: pointer;
       font-size: 1em;
+    }
+
+    .question {
+      display: none;
+      position: relative;
+      z-index: 10;
+      padding: 2em;
+    }
+
+    .question.active {
+      display: block;
     }
 
     audio {
@@ -68,14 +68,78 @@
     <source src="audio-glitch-sample.mp3" type="audio/mp3" />
   </audio>
 
+  <!-- 🎬 PANTALLA DE INICIO -->
   <div class="start-screen" id="start">
     <h1>bienvenidx a este test de personalidad</h1>
     <button class="start-button" onclick="startGame()">Empezar</button>
   </div>
 
-  <!-- Aquí irían las preguntas como divs con id="q1" hasta "q7" -->
-  <!-- Cada uno tendrá class="question" -->
-  <!-- El primero será activado dinámicamente -->
+  <!-- ❓ PREGUNTAS -->
+  <div class="question" id="q1">
+    <p>1. ¿Qué canción suena mientras saltas?</p>
+    <div class="answers">
+      <a href="https://www.youtube.com/watch?v=M9wo5N4lZS0" target="_blank">1. flores en mi cora</a>
+      <a href="https://www.youtube.com/watch?v=Jr4y9oVS8rk" target="_blank">2. del cielo al suelo</a>
+      <a href="https://www.youtube.com/watch?v=FpslVgJrty8" target="_blank">3. ella se olvidó de mí</a>
+      <button onclick="nextQuestion()">Siguiente</button>
+    </div>
+  </div>
+
+  <div class="question" id="q2">
+    <p>2. ¿Qué sonido es una cierva?</p>
+    <audio controls><source src="cierva1.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">1. En el bosque</button>
+    <audio controls><source src="cierva2.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">2. En la playa</button>
+    <audio controls><source src="cierva3.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">3. En la casa</button>
+  </div>
+
+  <div class="question" id="q3">
+    <p>3. Si jugaras al futbol ¿qué elemento te gustaría más?</p>
+    <div class="answers">
+      <button onclick="nextQuestion()">1. La pelota</button>
+      <button onclick="nextQuestion()">2. Los tacos</button>
+      <button onclick="nextQuestion()">3. El césped</button>
+    </div>
+  </div>
+
+  <div class="question" id="q4">
+    <p>4. ¿Te volviste más amable al escuchar?</p>
+    <audio controls><source src="quisecorrerymepillaste.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">1. Quise correr y me pillaste</button>
+    <audio controls><source src="hoynomevoyaduchar.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">2. Hoy no me voy a duchar</button>
+    <audio controls><source src="laquenoseaasertiva.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">3. La que no sea asertiva</button>
+  </div>
+
+  <div class="question" id="q5">
+    <p>5. Estás en tu habitación y eres...</p>
+    <div class="answers">
+      <button onclick="nextQuestion()">1. Un cable</button>
+      <button onclick="nextQuestion()">2. Una maceta</button>
+      <button onclick="nextQuestion()">3. Un mechero</button>
+    </div>
+  </div>
+
+  <div class="question" id="q6">
+    <p>6. En oración, eres...</p>
+    <div class="answers">
+      <button onclick="nextQuestion()">1. Soy guapa al natu</button>
+      <button onclick="nextQuestion()">2. No pasa nada, bebé</button>
+      <button onclick="nextQuestion()">3. OMG, ¿qué hicisteis?</button>
+    </div>
+  </div>
+
+  <div class="question" id="q7">
+    <p>7. Tú continuarías esto: "Y si quieres te llamo para ir a la calle y te dejo coments como..."</p>
+    <div class="answers">
+      <button onclick="endGame()">1. You are my sunshine</button>
+      <button onclick="endGame()">2. Me siento en batalla</button>
+      <button onclick="endGame()">3. No continuaría</button>
+    </div>
+  </div>
 
   <script>
     const audio = document.getElementById('glitchAudio');
@@ -103,7 +167,12 @@
       stopAllAudios();
       document.getElementById(`q${currentQuestion}`).classList.remove('active');
       currentQuestion++;
-      document.getElementById(`q${currentQuestion}`).classList.add('active');
+      const next = document.getElementById(`q${currentQuestion}`);
+      if (next) {
+        next.classList.add('active');
+      } else {
+        alert("Fin del juego. Pronto definiremos el resultado según tus elecciones.");
+      }
     }
 
     function endGame() {
