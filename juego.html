@@ -3,115 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Humano que se tatúa</title>
+  <title>Glitch Abstract Page</title>
   <style>
     body {
       margin: 0;
-      background: #fff;
-      font-family: 'Courier New', monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 1rem;
+      background: black;
+      overflow: hidden;
+      cursor: crosshair;
+      color: white;
+      font-family: monospace;
     }
 
     svg {
-      width: 150px;
-      margin-bottom: 2rem;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+
+    .glitch-line {
+      stroke: white;
+      stroke-width: 1;
+      animation: glitch 0.3s infinite alternate;
+    }
+
+    @keyframes glitch {
+      0% { transform: translateX(0); opacity: 1; }
+      50% { transform: translateX(3px); opacity: 0.7; }
+      100% { transform: translateX(-3px); opacity: 0.4; }
+    }
+
+    .shape {
+      fill: none;
+      stroke: #ff00ff;
+      stroke-width: 2;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.5; }
     }
 
     .question {
+      position: relative;
+      z-index: 10;
+      padding: 2em;
+    }
+
+    .question:not(:first-of-type) {
       display: none;
-      margin-bottom: 2rem;
-      text-align: center;
     }
 
-    .question.active {
+    .answers button {
       display: block;
-    }
-
-    .question p {
-      margin-bottom: 1rem;
-    }
-
-    button {
-      display: block;
-      margin: 0.4rem auto;
-      background: black;
+      margin: 1em 0;
+      background: none;
+      border: 1px solid white;
       color: white;
-      border: none;
-      padding: 0.4rem 1rem;
+      padding: 0.5em;
       cursor: pointer;
-    }
-
-    .tattoo {
-      fill: black;
-      opacity: 0.8;
     }
 
     audio {
       display: block;
-      margin: 0.5rem auto;
+      margin: 1em 0;
     }
   </style>
 </head>
 <body>
-  <!-- Humanoide -->
-  <svg viewBox="0 0 100 200">
-    <circle cx="50" cy="30" r="15" fill="gray" />
-    <circle cx="45" cy="28" r="2" fill="black" />
-    <circle cx="55" cy="28" r="2" fill="black" />
-    <rect x="35" y="45" width="30" height="60" fill="gray" />
-    <rect x="38" y="105" width="6" height="20" fill="gray" />
-    <rect x="56" y="105" width="6" height="20" fill="gray" />
-    <rect x="25" y="50" width="8" height="25" fill="gray" />
-    <rect x="67" y="50" width="8" height="25" fill="gray" />
-    <circle id="tattoo1" class="tattoo" cx="50" cy="60" r="2" visibility="hidden" />
-    <circle id="tattoo2" class="tattoo" cx="42" cy="50" r="2" visibility="hidden" />
+  <svg>
+    <circle class="shape" cx="30%" cy="40%" r="80" />
+    <rect class="shape" x="60%" y="20%" width="100" height="100" />
+    <line class="glitch-line" x1="0" y1="10%" x2="100%" y2="10%" />
+    <line class="glitch-line" x1="0" y1="50%" x2="100%" y2="50%" />
+    <line class="glitch-line" x1="0" y1="90%" x2="100%" y2="90%" />
   </svg>
 
-  <!-- Pregunta 1 -->
-  <div id="q1" class="question active">
-    <p>¿Qué canción suena mientras saltas?</p>
-    <button onclick="handleMusic('tattoo1', 'https://www.youtube.com/watch?v=M9wo5N4lZS0')">flores en mi cora</button>
-    <button onclick="handleMusic('tattoo1', 'https://www.youtube.com/watch?v=Jr4y9oVS8rk')">del cielo al suelo</button>
-    <button onclick="handleMusic('tattoo1', 'https://www.youtube.com/watch?v=FpslVgJrty8')">ella se olvidó de mí</button>
+  <audio id="glitchAudio" loop>
+    <source src="audio-glitch-sample.mp3" type="audio/mp3" />
+  </audio>
+
+  <div class="question" id="q3">
+    <p>3. Si jugaras al futbol ¿qué elemento te gustaría más?</p>
+    <div class="answers">
+      <button onclick="nextQuestion()">1. La pelota</button>
+      <button onclick="nextQuestion()">2. Los tacos</button>
+      <button onclick="nextQuestion()">3. El césped</button>
+    </div>
   </div>
 
-  <!-- Pregunta 2 con audios y respuestas -->
-  <div id="q2" class="question">
-    <p><strong></strong></p>
-    <audio id="audio1" controls>
-      <source src="cierva1.m4a" type="audio/mp4" />
-    </audio>
-    <audio id="audio2" controls>
-      <source src="cierva2.m4a" type="audio/mp4" />
-    </audio>
-    <audio id="audio3" controls>
-      <source src="cierva3.m4a" type="audio/mp4" />
-    </audio>
-    <p>¿Qué sonido es una cierva?</p>
-    <button onclick="chooseCierva(1)">audio 1</button>
-    <button onclick="chooseCierva(2)">audio 2</button>
-    <button onclick="chooseCierva(3)">audio 3</button>
+  <div class="question" id="q4">
+    <p>4. ¿Te volviste más amable al escuchar?</p>
+    <audio controls><source src="quisecorrerymepillaste.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">1. Quise correr y me pillaste</button>
+    <audio controls><source src="hoynomevoyaduchar.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">2. Hoy no me voy a duchar</button>
+    <audio controls><source src="laquenoseaasertiva.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">3. La que no sea asertiva</button>
+  </div>
+
+  <div class="question" id="q5">
+    <p>5. Estás en tu habitación y eres...</p>
+    <div class="answers">
+      <button onclick="endGame()">1. Un cable</button>
+      <button onclick="endGame()">2. Una maceta</button>
+      <button onclick="endGame()">3. Un mechero</button>
+    </div>
   </div>
 
   <script>
-    const q1 = document.getElementById("q1");
-    const q2 = document.getElementById("q2");
+    const audio = document.getElementById('glitchAudio');
+    document.body.addEventListener('click', () => {
+      audio.play();
+    }, { once: true });
 
-    function handleMusic(tattooId, url) {
-      document.getElementById(tattooId).setAttribute("visibility", "visible");
-      window.open(url, '_blank');
-      q1.classList.remove("active");
-      q2.classList.add("active");
+    let currentQuestion = 3;
+
+    function nextQuestion() {
+      document.getElementById(`q${currentQuestion}`).style.display = 'none';
+      currentQuestion++;
+      document.getElementById(`q${currentQuestion}`).style.display = 'block';
     }
 
-    function chooseCierva(choice) {
-      document.getElementById("tattoo2").setAttribute("visibility", "visible");
-      alert("¡Gracias por elegir! 💖");
+    function endGame() {
+      document.getElementById(`q${currentQuestion}`).style.display = 'none';
+      alert("Fin del juego. Pronto definiremos el resultado según tus elecciones.");
     }
   </script>
 </body>
