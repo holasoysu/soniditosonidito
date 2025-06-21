@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Glitch Abstract Page</title>
+  <title>Test de personalidad glitch</title>
   <style>
     body {
       margin: 0;
-      background: black;
+      background: #f8f8f8;
       overflow: hidden;
       cursor: crosshair;
-      color: white;
+      color: #222;
       font-family: monospace;
     }
 
@@ -25,20 +25,29 @@
       position: relative;
       z-index: 10;
       padding: 2em;
-    }
-
-    .question:not(:first-of-type) {
       display: none;
     }
 
-    .answers button {
+    .question.active {
       display: block;
-      margin: 1em 0;
+    }
+
+    .start-screen {
+      position: relative;
+      z-index: 10;
+      padding: 4em 2em;
+      text-align: center;
+    }
+
+    .answers button, .start-button {
+      display: block;
+      margin: 1em auto;
       background: none;
-      border: 1px solid white;
-      color: white;
-      padding: 0.5em;
+      border: 1px solid #222;
+      color: #222;
+      padding: 0.75em 1.5em;
       cursor: pointer;
+      font-size: 1em;
     }
 
     audio {
@@ -47,7 +56,7 @@
     }
 
     a {
-      color: cyan;
+      color: #666;
       text-decoration: underline;
     }
   </style>
@@ -59,71 +68,14 @@
     <source src="audio-glitch-sample.mp3" type="audio/mp3" />
   </audio>
 
-  <div class="question" id="q1">
-    <p>1. ¿Qué canción suena mientras saltas?</p>
-    <div class="answers">
-      <a href="https://www.youtube.com/watch?v=M9wo5N4lZS0&list=RDM9wo5N4lZS0&start_radio=1" target="_blank">1. flores en mi cora</a>
-      <a href="https://www.youtube.com/watch?v=Jr4y9oVS8rk&list=RDJr4y9oVS8rk&start_radio=1" target="_blank">2. del cielo al suelo</a>
-      <a href="https://www.youtube.com/watch?v=FpslVgJrty8&list=RDFpslVgJrty8&start_radio=1" target="_blank">3. ella se olvidó de mí</a>
-      <button onclick="nextQuestion()">Siguiente</button>
-    </div>
+  <div class="start-screen" id="start">
+    <h1>bienvenidx a este test de personalidad</h1>
+    <button class="start-button" onclick="startGame()">Empezar</button>
   </div>
 
-  <div class="question" id="q2">
-    <p>2. ¿Qué sonido es una cierva?</p>
-    <audio controls><source src="cierva1.m4a" type="audio/mp4" /></audio>
-    <button onclick="nextQuestion()">1. En el bosque</button>
-    <audio controls><source src="cierva2.m4a" type="audio/mp4" /></audio>
-    <button onclick="nextQuestion()">2. En la playa</button>
-    <audio controls><source src="cierva3.m4a" type="audio/mp4" /></audio>
-    <button onclick="nextQuestion()">3. En la casa</button>
-  </div>
-
-  <div class="question" id="q3">
-    <p>3. Si jugaras al futbol ¿qué elemento te gustaría más?</p>
-    <div class="answers">
-      <button onclick="nextQuestion()">1. La pelota</button>
-      <button onclick="nextQuestion()">2. Los tacos</button>
-      <button onclick="nextQuestion()">3. El césped</button>
-    </div>
-  </div>
-
-  <div class="question" id="q4">
-    <p>4. ¿Te volviste más amable al escuchar?</p>
-    <audio controls><source src="quisecorrerymepillaste.m4a" type="audio/mp4" /></audio>
-    <button onclick="nextQuestion()">1. Quise correr y me pillaste</button>
-    <audio controls><source src="hoynomevoyaduchar.m4a" type="audio/mp4" /></audio>
-    <button onclick="nextQuestion()">2. Hoy no me voy a duchar</button>
-    <audio controls><source src="laquenoseaasertiva.m4a" type="audio/mp4" /></audio>
-    <button onclick="nextQuestion()">3. La que no sea asertiva</button>
-  </div>
-
-  <div class="question" id="q5">
-    <p>5. Estás en tu habitación y eres...</p>
-    <div class="answers">
-      <button onclick="nextQuestion()">1. Un cable</button>
-      <button onclick="nextQuestion()">2. Una maceta</button>
-      <button onclick="nextQuestion()">3. Un mechero</button>
-    </div>
-  </div>
-
-  <div class="question" id="q6">
-    <p>6. En oración, eres...</p>
-    <div class="answers">
-      <button onclick="nextQuestion()">1. Soy guapa al natu</button>
-      <button onclick="nextQuestion()">2. No pasa nada, bebé</button>
-      <button onclick="nextQuestion()">3. OMG, ¿qué hicisteis?</button>
-    </div>
-  </div>
-
-  <div class="question" id="q7">
-    <p>7. Tú continuarías esto: "Y si quieres te llamo para ir a la calle y te dejo coments como..."</p>
-    <div class="answers">
-      <button onclick="endGame()">1. You are my sunshine</button>
-      <button onclick="endGame()">2. Me siento en batalla</button>
-      <button onclick="endGame()">3. No continuaría</button>
-    </div>
-  </div>
+  <!-- Aquí irían las preguntas como divs con id="q1" hasta "q7" -->
+  <!-- Cada uno tendrá class="question" -->
+  <!-- El primero será activado dinámicamente -->
 
   <script>
     const audio = document.getElementById('glitchAudio');
@@ -131,16 +83,32 @@
       audio.play();
     }, { once: true });
 
-    let currentQuestion = 1;
+    let currentQuestion = 0;
+
+    function stopAllAudios() {
+      const audios = document.querySelectorAll('audio');
+      audios.forEach(a => {
+        a.pause();
+        a.currentTime = 0;
+      });
+    }
+
+    function startGame() {
+      document.getElementById('start').style.display = 'none';
+      currentQuestion = 1;
+      document.getElementById('q1').classList.add('active');
+    }
 
     function nextQuestion() {
-      document.getElementById(`q${currentQuestion}`).style.display = 'none';
+      stopAllAudios();
+      document.getElementById(`q${currentQuestion}`).classList.remove('active');
       currentQuestion++;
-      document.getElementById(`q${currentQuestion}`).style.display = 'block';
+      document.getElementById(`q${currentQuestion}`).classList.add('active');
     }
 
     function endGame() {
-      document.getElementById(`q${currentQuestion}`).style.display = 'none';
+      stopAllAudios();
+      document.getElementById(`q${currentQuestion}`).classList.remove('active');
       alert("Fin del juego. Pronto definiremos el resultado según tus elecciones.");
     }
 
@@ -149,48 +117,29 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const shapes = [];
-    const colors = ['#00ffff', '#ff00ff', '#00ff88', '#ff8800', '#ffffff', '#39ff14', '#ff073a'];
-
-    for (let i = 0; i < 120; i++) {
-      shapes.push({
+    const lines = [];
+    for (let i = 0; i < 40; i++) {
+      lines.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        dx: (Math.random() - 0.5) * 3,
-        dy: (Math.random() - 0.5) * 3,
-        size: Math.random() * 8 + 2,
-        type: Math.random() > 0.5 ? 'circle' : 'rect',
-        color: colors[Math.floor(Math.random() * colors.length)],
-        rotation: Math.random() * 360
+        length: Math.random() * 100 + 20,
+        speed: Math.random() * 0.5 + 0.2,
+        opacity: Math.random() * 0.5 + 0.2
       });
     }
 
     function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      shapes.forEach(s => {
-        ctx.save();
-        ctx.translate(s.x, s.y);
-        ctx.rotate(s.rotation * Math.PI / 180);
-        ctx.fillStyle = s.color;
-        if (s.type === 'circle') {
-          ctx.beginPath();
-          ctx.arc(0, 0, s.size, 0, Math.PI * 2);
-          ctx.fill();
-        } else {
-          ctx.fillRect(-s.size/2, -s.size/2, s.size, s.size);
-        }
-        ctx.restore();
-
-        s.x += s.dx;
-        s.y += s.dy;
-        s.rotation += (Math.random() - 0.5) * 5;
-
-        if (s.x < 0 || s.x > canvas.width) s.dx *= -1;
-        if (s.y < 0 || s.y > canvas.height) s.dy *= -1;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      lines.forEach(l => {
+        ctx.beginPath();
+        ctx.moveTo(l.x, l.y);
+        ctx.lineTo(l.x + l.length, l.y);
+        ctx.strokeStyle = `rgba(180, 180, 180, ${l.opacity})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        l.x += l.speed;
+        if (l.x > canvas.width) l.x = -l.length;
       });
-
       requestAnimationFrame(draw);
     }
 
