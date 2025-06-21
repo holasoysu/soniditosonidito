@@ -145,104 +145,69 @@
   <button onclick="selectAnswer(['madre'])">No continuaría</button>
 </div>
 
-  <script>
-    const audio = document.getElementById('glitchAudio');
-    document.body.addEventListener('click', () => {
-      audio.play();
-    }, { once: true });
+ <script>
+const audio = document.getElementById('glitchAudio');
+document.body.addEventListener('click', () => {
+  audio.play();
+}, { once: true });
 
-    let currentQuestion = 0;
+let currentQuestion = 1;
+const totalQuestions = 7;
 
-    const scores = {
-      famosa: 0,
-      caballera: 0,
-      fumada: 0,
-      güin: 0,
-      madre: 0
-    };
+const scores = {
+  famosa: 0,
+  caballera: 0,
+  fumada: 0,
+  güin: 0,
+  madre: 0
+};
 
-    function stopAllAudios() {
-      const audios = document.querySelectorAll('audio');
-      audios.forEach(a => {
-        a.pause();
-        a.currentTime = 0;
-      });
-    }
+function stopAllAudios() {
+  const audios = document.querySelectorAll('audio');
+  audios.forEach(a => {
+    a.pause();
+    a.currentTime = 0;
+  });
+}
 
-    function startGame() {
-      document.getElementById('start').style.display = 'none';
-      currentQuestion = 1;
-      document.getElementById('q1').classList.add('active');
-    }
+function startGame() {
+  document.getElementById('start').style.display = 'none';
+  document.getElementById('q1').classList.add('active');
+}
 
-    function selectAnswer(categories) {
-      categories.forEach(cat => scores[cat]++);
-      nextQuestion();
-    }
+function selectAnswer(types) {
+  stopAllAudios();
 
-    function nextQuestion() {
-      stopAllAudios();
-      document.getElementById(`q${currentQuestion}`).classList.remove('active');
-      currentQuestion++;
-      const next = document.getElementById(`q${currentQuestion}`);
-      if (next) {
-        next.classList.add('active');
-      } else {
-        showResult();
-      }
-    }
+  types.forEach(t => scores[t]++);
+  document.getElementById(`q${currentQuestion}`).classList.remove('active');
 
-    function showResult() {
-      stopAllAudios();
-      const resultDiv = document.getElementById('result');
-      const topScore = Object.entries(scores).reduce((a, b) => b[1] > a[1] ? b : a);
-      const name = topScore[0];
+  currentQuestion++;
+  if (currentQuestion <= totalQuestions) {
+    document.getElementById(`q${currentQuestion}`).classList.add('active');
+  } else {
+    showResult();
+  }
+}
 
-      const descriptions = {
-        famosa: "Durante las edades sobrias las amazonas fueron llamadas las famosas, las afamadas. Lo fueron por sus combates, la amante al costado de la amante, una corriendo inmediatamente en auxilio de la otra si era necesario, tal como se ve en los bajorrelieves de los monumentos.",
-        caballera: "Se llama caballeras a aquellas que parten en busca de guerras de amor nuevas, abandonando a sus amantes. La característica de las caballeras es que no les agrada un lugar fijo. Los viajes, las aventuras, los encuentros nuevos les causan placer. En el juego del tarot, las caballeras preceden a los pajes y cabalgan sobre yeguas. Se las llama caballeras de copas, caballeras de bastos, caballeras de oros y caballeras de espadas.",
-        fumada: "Las fumadas de amor son las más placenteras. Invaden el cuerpo por sorpresa y provocan un bombardeo interno de alegría, muchas veces a la altura del plexus o de la garganta, y un desbordamiento de los humores.",
-        güin: "El origen de esta palabra hay que buscarlo, según Eila Swan, en el término queen que significa reina. En efecto, existió la costumbre, en Galia, de elegir como reina a las amantes más valerosas. Después se las llamó reinas por burla, más tarde sucias queens, expresión que, deformada, da lugar a sucia güines.",
-        madre: "Todas se llamaban amazonas en el jardín terrestre, en la edad de oro, y las madres y las hijas no eran distintas las unas de las otras. Vivían en armonía y compartían sus placeres. Se contaban sus gestas y hazañas. Se comunicaban los lugares tranquilos y hermosos del jardín terrestre e iban a verlos. Cazaban juntas, recogían juntas los frutos de los árboles y erraban juntas. No había límites para sus aventuras y la edad carecía de sentido. Todas se concebían como amazonas."
-      };
+function showResult() {
+  stopAllAudios();
+  const resultDiv = document.getElementById('result');
 
-      document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
-      resultDiv.innerHTML = `<div class="result-title">${name.toUpperCase()}</div><p>${descriptions[name]}</p>`;
-      resultDiv.style.display = 'block';
-    }
+  const topScore = Object.entries(scores).reduce((a, b) => a[1] > b[1] ? a : b);
+  const name = topScore[0];
 
-    const canvas = document.getElementById('glitchCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  const descriptions = {
+    famosa: "Durante las edades sobrias las amazonas fueron llamadas las famosas, las afamadas. Lo fueron por sus combates, la amante al costado de la amante, una corriendo inmediatamente en auxilio de la otra si era necesario, tal como se ve en los bajorrelieves de los monumentos.",
+    caballera: "Se llama caballeras a aquellas que parten en busca de guerras de amor nuevas, abandonando a sus amantes. La característica de las caballeras es que no les agrada un lugar fijo. Los viajes, las aventuras, los encuentros nuevos les causan placer.",
+    fumada: "Las fumadas de amor son las más placenteras. Invaden el cuerpo por sorpresa y provocan un bombardeo interno de alegría, muchas veces a la altura del plexus o de la garganta, y un desbordamiento de los humores.",
+    güin: "El origen de esta palabra hay que buscarlo, según Eila Swan, en el término queen que significa reina. En efecto, existió la costumbre, en Galia, de elegir como reina a las amantes más valerosas. Después se las llamó reinas por burla, más tarde sucias queens, expresión que, deformada, da lugar a sucia güines.",
+    madre: "Todas se llamaban amazonas en el jardín terrestre, en la edad de oro, y las madres y las hijas no eran distintas las unas de las otras. Vivían en armonía y compartían sus placeres. Se contaban sus gestas y hazañas. Se comunicaban los lugares tranquilos y hermosos y erraban juntas."
+  };
 
-    const lines = [];
-    for (let i = 0; i < 40; i++) {
-      lines.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        length: Math.random() * 100 + 20,
-        speed: Math.random() * 0.5 + 0.2,
-        opacity: Math.random() * 0.5 + 0.2
-      });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      lines.forEach(l => {
-        ctx.beginPath();
-        ctx.moveTo(l.x, l.y);
-        ctx.lineTo(l.x + l.length, l.y);
-        ctx.strokeStyle = `rgba(180, 180, 180, ${l.opacity})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        l.x += l.speed;
-        if (l.x > canvas.width) l.x = -l.length;
-      });
-      requestAnimationFrame(draw);
-    }
-
-    draw();
-  </script>
-</body>
-</html>
+  resultDiv.innerHTML = `
+    <div class="result-title">${name.toUpperCase()}</div>
+    <div>${descriptions[name]}</div>
+  `;
+  resultDiv.style.display = 'block';
+}
+</script>
