@@ -87,8 +87,63 @@
 
   <div id="result" class="result-screen"></div>
 
-  <!-- Las preguntas irán aquí -->
-  <!-- Puedo completarlas en el siguiente bloque si lo deseas -->
+  <div class="question" id="q1">
+  <p>¿Qué canción suena mientras saltas?</p>
+  <a href="https://www.youtube.com/watch?v=M9wo5N4lZS0" target="_blank">1. flores en mi cora</a>
+  <a href="https://www.youtube.com/watch?v=Jr4y9oVS8rk" target="_blank">2. del cielo al suelo</a>
+  <a href="https://www.youtube.com/watch?v=FpslVgJrty8" target="_blank">3. ella se olvidó de mí</a>
+  <button onclick="selectAnswer(['fumada','madre'])">flores en mi cora</button>
+  <button onclick="selectAnswer(['caballera','famosa'])">del cielo al suelo</button>
+  <button onclick="selectAnswer(['güin'])">ella se olvidó de mí</button>
+</div>
+
+<div class="question" id="q2">
+  <p>¿Qué sonido es una cierva?</p>
+  <audio src="cierva1.m4a" controls></audio>
+  <button onclick="selectAnswer(['güin','madre'])">En el bosque</button>
+  <audio src="cierva2.m4a" controls></audio>
+  <button onclick="selectAnswer(['caballera','fumada'])">En la playa</button>
+  <audio src="cierva3.m4a" controls></audio>
+  <button onclick="selectAnswer(['famosa','caballera'])">En la casa</button>
+</div>
+
+<div class="question" id="q3">
+  <p>Si jugaras al fútbol, ¿qué elemento te gustaría más?</p>
+  <button onclick="selectAnswer(['caballera'])">La pelota</button>
+  <button onclick="selectAnswer(['güin'])">Los tacos</button>
+  <button onclick="selectAnswer(['madre'])">El césped</button>
+</div>
+
+<div class="question" id="q4">
+  <p>¿Te volviste más amable al escuchar?</p>
+  <audio src="quisecorrerymepillaste.m4a" controls></audio>
+  <button onclick="selectAnswer(['fumada'])">Quise correr y me pillaste</button>
+  <audio src="hoynomevoyaduchar.m4a" controls></audio>
+  <button onclick="selectAnswer(['famosa'])">Hoy no me voy a duchar</button>
+  <audio src="laquenoseaasertiva.m4a" controls></audio>
+  <button onclick="selectAnswer(['güin','caballera','madre'])">La que no sea asertiva</button>
+</div>
+
+<div class="question" id="q5">
+  <p>Estás en tu habitación y eres...</p>
+  <button onclick="selectAnswer(['madre','fumada'])">Un cable</button>
+  <button onclick="selectAnswer(['güin','famosa'])">Una maceta</button>
+  <button onclick="selectAnswer(['caballera'])">Un mechero</button>
+</div>
+
+<div class="question" id="q6">
+  <p>En oración, eres...</p>
+  <button onclick="selectAnswer(['famosa','madre'])">Soy guapa al natu</button>
+  <button onclick="selectAnswer(['caballera','güin'])">No pasa nada, bebé</button>
+  <button onclick="selectAnswer(['fumada'])">OMG, ¿qué hicisteis?</button>
+</div>
+
+<div class="question" id="q7">
+  <p>Tú continuarías esto... “y si quieres te llamo para ir a la calle y te dejo comments”</p>
+  <button onclick="selectAnswer(['güin','fumada'])">You are my sunshine</button>
+  <button onclick="selectAnswer(['caballera','famosa'])">Me siento en batalla</button>
+  <button onclick="selectAnswer(['madre'])">No continuaría</button>
+</div>
 
   <script>
     const audio = document.getElementById('glitchAudio');
