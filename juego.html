@@ -69,6 +69,11 @@
       display: block;
       margin: 1em 0;
     }
+
+    a {
+      color: cyan;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -83,6 +88,26 @@
   <audio id="glitchAudio" loop>
     <source src="audio-glitch-sample.mp3" type="audio/mp3" />
   </audio>
+
+  <div class="question" id="q1">
+    <p>1. ¿Qué canción suena mientras saltas?</p>
+    <div class="answers">
+      <a href="https://www.youtube.com/watch?v=M9wo5N4lZS0&list=RDM9wo5N4lZS0&start_radio=1" target="_blank">1. flores en mi cora</a>
+      <a href="https://www.youtube.com/watch?v=Jr4y9oVS8rk&list=RDJr4y9oVS8rk&start_radio=1" target="_blank">2. del cielo al suelo</a>
+      <a href="https://www.youtube.com/watch?v=FpslVgJrty8&list=RDFpslVgJrty8&start_radio=1" target="_blank">3. ella se olvidó de mí</a>
+      <button onclick="nextQuestion()">Siguiente</button>
+    </div>
+  </div>
+
+  <div class="question" id="q2">
+    <p>2. ¿Qué sonido es una cierva?</p>
+    <audio controls><source src="cierva1.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">1. En el bosque</button>
+    <audio controls><source src="cierva2.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">2. En la playa</button>
+    <audio controls><source src="cierva3.m4a" type="audio/mp4" /></audio>
+    <button onclick="nextQuestion()">3. En la casa</button>
+  </div>
 
   <div class="question" id="q3">
     <p>3. Si jugaras al futbol ¿qué elemento te gustaría más?</p>
@@ -118,7 +143,7 @@
       audio.play();
     }, { once: true });
 
-    let currentQuestion = 3;
+    let currentQuestion = 1;
 
     function nextQuestion() {
       document.getElementById(`q${currentQuestion}`).style.display = 'none';
