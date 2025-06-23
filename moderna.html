@@ -1,68 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>moderna</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moderna</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       background: #000;
-      overflow: hidden;
       font-family: monospace;
+      color: #fff;
+      overflow: hidden;
     }
 
     .container {
       position: relative;
       width: 100vw;
       height: 100vh;
-      background: url('pelazo.JPG') no-repeat center center;
+      background-image: url('pelazo.JPG');
       background-size: cover;
+      background-position: center;
     }
 
-    .palabra {
+    .word {
       position: absolute;
       color: white;
-      background-color: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       padding: 0.3em 0.6em;
-      border-radius: 4px;
+      border-radius: 5px;
       font-size: 1em;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.3s ease;
       pointer-events: none;
     }
 
-    .zona {
+    .hotspot {
       position: absolute;
       width: 40px;
       height: 40px;
       cursor: pointer;
     }
 
-    .zona:hover + .palabra {
+    .hotspot:hover + .word {
       opacity: 1;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="zona" style="top: 15%; left: 40%;"></div>
-    <div class="palabra" style="top: 15%; left: 40%;">ghosting</div>
+    <!-- Cada hotspot representa una zona activa de la imagen -->
+    <div class="hotspot" style="top: 20%; left: 30%;"></div>
+    <div class="word" style="top: 20%; left: 30%;">un pequeño leopardo</div>
 
-    <div class="zona" style="top: 30%; left: 70%;"></div>
-    <div class="palabra" style="top: 30%; left: 70%;">camiseta del País Vasco aunque seas madrileña</div>
+    <div class="hotspot" style="top: 35%; left: 60%;"></div>
+    <div class="word" style="top: 35%; left: 60%;">yo y mis amigas hacemos handpoke</div>
 
-    <div class="zona" style="top: 55%; left: 25%;"></div>
-    <div class="palabra" style="top: 55%; left: 25%;">yo y mis amigas hacemos handpoke</div>
+    <div class="hotspot" style="top: 55%; left: 20%;"></div>
+    <div class="word" style="top: 55%; left: 20%;">ghosting</div>
 
-    <div class="zona" style="top: 70%; left: 60%;"></div>
-    <div class="palabra" style="top: 70%; left: 60%;">iPhone cutrón para las llamadas</div>
+    <div class="hotspot" style="top: 40%; left: 75%;"></div>
+    <div class="word" style="top: 40%; left: 75%;">camiseta del País Vasco aunque seas madrileña</div>
 
-    <div class="zona" style="top: 80%; left: 15%;"></div>
-    <div class="palabra" style="top: 80%; left: 15%;">iPhone 16 para las fotitos</div>
+    <div class="hotspot" style="top: 70%; left: 50%;"></div>
+    <div class="word" style="top: 70%; left: 50%;">Iphone cutrón para las llamaditas</div>
 
-    <div class="zona" style="top: 40%; left: 50%;"></div>
-    <div class="palabra" style="top: 40%; left: 50%;">un pequeño leopardo</div>
+    <div class="hotspot" style="top: 25%; left: 80%;"></div>
+    <div class="word" style="top: 25%; left: 80%;">Iphone 16 para las fotitos</div>
+
+    <div class="hotspot" style="top: 60%; left: 65%;"></div>
+    <div class="word" style="top: 60%; left: 65%;">la que no sea FLINTA está eliminada</div>
+
+    <div class="hotspot" style="top: 15%; left: 10%;"></div>
+    <div class="word" style="top: 15%; left: 10%;">unos calzoncillos de superheroes para trabajar</div>
+
+    <div class="hotspot" style="top: 45%; left: 35%;"></div>
+    <div class="word" style="top: 45%; left: 35%;">hair gel</div>
+
+    <div class="hotspot" style="top: 85%; left: 25%;"></div>
+    <div class="word" style="top: 85%; left: 25%;">Ideas políticas en el pelo</div>
+
+    <div class="hotspot" style="top: 30%; left: 15%;"></div>
+    <div class="word" style="top: 30%; left: 15%;">un tatuaje en la ingle</div>
+
+    <div class="hotspot" style="top: 75%; left: 75%;"></div>
+    <div class="word" style="top: 75%; left: 75%;">vamos todas a saltar a la CSO</div>
+
+    <div class="hotspot" style="top: 50%; left: 90%;"></div>
+    <div class="word" style="top: 50%; left: 90%;">trabajar con tu ex</div>
+
+    <div class="hotspot" style="top: 10%; left: 50%;"></div>
+    <div class="word" style="top: 10%; left: 50%;">bolsito cinco euritos, zapatos de punta con la suela comida</div>
   </div>
 </body>
 </html>
