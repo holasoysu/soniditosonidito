@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>pajarito</title>
+  <style>
+    body {
+      background: #fdfdfd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
+    svg {
+      width: 200px;
+      height: auto;
+    }
+
+    .ala {
+      transform-origin: center;
+      animation: aleteo 2s infinite ease-in-out;
+    }
+
+    @keyframes aleteo {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-10deg); }
+    }
+  </style>
+</head>
+<body>
+
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- cuerpo -->
+  <ellipse cx="100" cy="100" rx="60" ry="40" fill="#444" />
+
+  <!-- ala -->
+  <path class="ala" d="M100,100 Q130,80 140,110 Q120,100 100,100" fill="#666" />
+
+  <!-- ojo -->
+  <circle cx="120" cy="90" r="5" fill="#fff" />
+  <circle cx="120" cy="90" r="2" fill="#000" />
+
+  <!-- pico -->
+  <polygon points="135,95 145,100 135,105" fill="#fc0" />
+</svg>
+
+</body>
+</html>
