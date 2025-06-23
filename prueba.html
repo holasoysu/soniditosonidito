@@ -1,65 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>texto loco texto loco</title>
+  <meta charset="UTF-8">
+  <title>Texto Superpuesto</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: white;
-      color: black;
-      font-family: 'Courier New', monospace;
-      font-size: 1.2em;
-      line-height: 1em;
+      background: #fff;
+      font-family: Garamond, serif;
       overflow: hidden;
-      position: relative;
     }
 
-    .repetido {
+    .texto-repetido {
       position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      pointer-events: none;
+      color: #111;
+      font-size: 1.5em;
+      pointer-events: none; /* importante para que el enlace funcione */
     }
 
-    .capa {
+    .texto-repetido span {
       position: absolute;
-      top: 0;
-      left: 0;
-      white-space: pre-wrap;
-      opacity: 0.08;
+      white-space: nowrap;
+      opacity: 0.15;
+    }
+
+    .link-container {
+      position: relative;
+      z-index: 10;
+      padding: 2em;
+    }
+
+    a {
+      position: relative;
+      z-index: 10;
+      color: #888;
+      text-decoration: underline;
+      pointer-events: auto;
     }
   </style>
 </head>
 <body>
-  <div class="repetido">
-    <!-- Puedes copiar más bloques <div class="capa"> si quieres más densidad -->
-    <div class="capa" style="transform: translate(0px, 0px);">
-      yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver.
-      aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado.
-      este texto es una prueba visual. rellenando la página de letritas pero los códigos son raritos y no me dejan.
-      ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles.
-      de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril.
-      pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de  <a href="pajarito.html">pajaritos</a> </div>
-    <div class="capa" style="transform: translate(100px, 100px);">
-      yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver.
-      aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado.
-      este texto es una prueba visual. rellenando la página de letritas pero los códigos son raritos y no me dejan.
-      ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles.
-      de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril.
-      pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de  <a href="pajarito.html">pajaritos</a> </div>
-    <div class="capa" style="transform: translate(200px, -50px);">
-      yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver.
-      aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado.
-      este texto es una prueba visual. rellenando la página de letritas pero los códigos son raritos y no me dejan.
-      ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles.
-      de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril.
-      pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de <a href="pajarito.html">pajaritos</a>
-    </div>
+
+  <div class="link-container">
+    <p>Este es un texto especial con enlace a <a href="pajaritos.html">pajaritos</a>.</p>
   </div>
+
+  <div class="texto-repetido" id="capaTexto"></div>
+
+  <script>
+    const texto = `yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado. este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan. ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles. de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril. pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de pajaritos. `;
+
+    const contenedor = document.getElementById("capaTexto");
+
+    for (let i = 0; i < 100; i++) {
+      const span = document.createElement("span");
+      span.textContent = texto;
+      span.style.top = `${Math.random() * 100}%`;
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.transform = `rotate(${Math.random() * 360}deg)`;
+      contenedor.appendChild(span);
+    }
+  </script>
+
 </body>
 </html>
