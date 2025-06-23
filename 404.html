@@ -1,65 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Página no encontrada</title>
+  <meta charset="UTF-8">
+  <title>404 - Página no encontrada</title>
   <style>
     body {
-      margin: 0;
-      background: #f2f2f2;
+      background-color: #d3d3d3;
       font-family: monospace;
-      color: #111;
-      height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      animation: glitchBackground 2s infinite;
-    }
-
-    @keyframes glitchBackground {
-      0% { background-color: #f2f2f2; }
-      20% { background-color: #e2e2e2; }
-      40% { background-color: #d0d0d0; }
-      60% { background-color: #f2f2f2; }
-      80% { background-color: #ffffff; }
-      100% { background-color: #f2f2f2; }
-    }
-
-    .container {
-      max-width: 600px;
+      height: 100vh;
+      margin: 0;
+      color: #111;
     }
 
     h1 {
-      font-size: 2em;
-      margin-bottom: 1em;
+      font-size: 4em;
+      margin: 0.2em 0;
     }
 
-    .choices button {
-      margin: 1em;
-      padding: 0.5em 1em;
-      font-family: monospace;
-      font-size: 1em;
-      border: 1px solid #111;
+    p {
+      margin: 1em 0;
+      max-width: 600px;
+    }
+
+    .glitch {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    .button-container {
+      margin-top: 2em;
+    }
+
+    button {
       background: none;
+      border: 1px solid black;
+      font-family: monospace;
+      padding: 0.5em 1em;
+      margin: 0 1em;
       cursor: pointer;
     }
 
-    .choices button:hover {
-      background-color: #ddd;
+    button:hover {
+      background: black;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Pues que no puedo poner una imagen triangular porque no funciona en esta aplicación.<br>
-      Bueno, quizá las modernas me dejan.<br><br>
-      Ey moderna, ¿me dejas?
-    </h1>
-    <div class="choices">
-      <button onclick="location.href='moderna.html'">Sí</button>
-      <button onclick="location.href='index.html'">No</button>
+  <h1>Error 404</h1>
+  <p>Página no encontrada</p>
+
+  <div class="glitch">
+    <p><strong>Pues que no puedo poner una imagen triangular porque no funciona en esta aplicación.</strong></p>
+    <p><strong>Bueno, quizá las modernas me dejan.</strong></p>
+    <p><strong>Ey moderna, ¿me dejas?</strong></p>
+
+    <div class="button-container">
+      <button onclick="window.location.href='moderna.html'">Sí</button>
+      <button onclick="window.location.href='index.html'">No</button>
     </div>
   </div>
 </body>
