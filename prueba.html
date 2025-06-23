@@ -1,72 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Texto loco texto loco</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
       background: white;
+      color: black;
       font-family: 'Courier New', monospace;
+      font-size: 1.2em;
+      line-height: 1em;
+      overflow: hidden;
       position: relative;
     }
 
-    .texto-superpuesto {
+    .repetido {
       position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 0;
     }
 
-    .texto-superpuesto span {
+    .capa {
       position: absolute;
-      white-space: nowrap;
-      font-size: 2em;
-      color: rgba(50, 50, 50, 0.15);
-      transform: rotate(calc(1turn * var(--r)));
-      left: calc(100% * var(--x));
-      top: calc(100% * var(--y));
-    }
-
-    .contenido {
-      position: relative;
-      z-index: 1;
-      padding: 3rem;
-      font-size: 1.2rem;
-      max-width: 600px;
-    }
-
-    a {
-      color: #555;
-      text-decoration: underline;
+      top: 0;
+      left: 0;
+      white-space: pre-wrap;
+      opacity: 0.5;
     }
   </style>
 </head>
 <body>
-
-  <div class="texto-superpuesto" id="overlay"></div>
-
-  <div class="contenido">
-    <p>Este es un texto especial con enlace a <a href="pajarito.html">pajaritos</a>.</p>
+  <div class="repetido">
+    <!-- Puedes copiar más bloques <div class="capa"> si quieres más densidad -->
+    <div class="capa" style="transform: translate(0px, 0px);">
+      yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver.
+      aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado.
+      este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan.
+      ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles.
+      de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril.
+      pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de <a href="pajaritos.html">pajaritos</a>
+    </div>
+    <div class="capa" style="transform: translate(100px, 100px);">
+      yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver.
+      aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado.
+      este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan.
+      ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles.
+      de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril.
+      pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de <a href="pajaritos.html" >pajaritos</a>
+    </div>
+    <div class="capa" style="transform: translate(200px, -50px);">
+      yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver.
+      aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado.
+      este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan.
+      ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles.
+      de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril.
+      pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de <a href="pajaritos.html">pajaritos</a>
+    </div>
   </div>
-
-  <script>
-    const overlay = document.getElementById("overlay");
-    const frase = "yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. ";
-    for (let i = 0; i < 80; i++) {
-      const span = document.createElement("span");
-      span.textContent = frase;
-      span.style.setProperty('--x', Math.random());
-      span.style.setProperty('--y', Math.random());
-      span.style.setProperty('--r', Math.random());
-      overlay.appendChild(span);
-    }
-  </script>
-
 </body>
 </html>
