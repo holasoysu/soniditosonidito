@@ -2,67 +2,69 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Texto loco texto loco</title>
+  <title>Texto Superpuesto</title>
   <style>
     body {
       margin: 0;
-      background: #fff;
-      font-family: Garamond, serif;
+      padding: 0;
       overflow: hidden;
+      background: white;
+      font-family: 'Courier New', monospace;
+      position: relative;
     }
 
-    .texto-repetido {
+    .texto-superpuesto {
       position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      color: #111;
-      font-size: 1.5em;
-      pointer-events: none; /* importante para que el enlace funcione */
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .texto-repetido span {
+    .texto-superpuesto span {
       position: absolute;
       white-space: nowrap;
-      opacity: 0.5;
+      font-size: 2em;
+      color: rgba(50, 50, 50, 0.15);
+      transform: rotate(calc(1turn * var(--r)));
+      left: calc(100% * var(--x));
+      top: calc(100% * var(--y));
     }
 
-    .link-container {
+    .contenido {
       position: relative;
-      z-index: 10;
-      padding: 2em;
+      z-index: 1;
+      padding: 3rem;
+      font-size: 1.2rem;
+      max-width: 600px;
     }
 
     a {
-      position: relative;
-      z-index: 10;
-      color: #888;
+      color: #555;
       text-decoration: underline;
-      pointer-events: auto;
     }
   </style>
 </head>
 <body>
 
-  <div class="link-container">
-    <p>Este es un texto especial con enlace a <a href="pajaritos.html">pajaritos</a>.</p>
+  <div class="texto-superpuesto" id="overlay"></div>
+
+  <div class="contenido">
+    <p>Este es un texto especial con enlace a <a href="pajarito.html">pajaritos</a>.</p>
   </div>
 
-  <div class="texto-repetido" id="capaTexto"></div>
-
   <script>
-    const texto = `yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado. este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan. ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles. de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril. pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de pajaritos. `;
-
-    const contenedor = document.getElementById("capaTexto");
-
-    for (let i = 0; i < 100; i++) {
+    const overlay = document.getElementById("overlay");
+    const frase = "yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. ";
+    for (let i = 0; i < 80; i++) {
       const span = document.createElement("span");
-      span.textContent = texto;
-      span.style.top = `${Math.random() * 100}%`;
-      span.style.left = `${Math.random() * 100}%`;
-      span.style.transform = `rotate(${Math.random() * 360}deg)`;
-      contenedor.appendChild(span);
+      span.textContent = frase;
+      span.style.setProperty('--x', Math.random());
+      span.style.setProperty('--y', Math.random());
+      span.style.setProperty('--r', Math.random());
+      overlay.appendChild(span);
     }
   </script>
 
