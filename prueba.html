@@ -1,56 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Texto Superpuesto</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
-      background-color: #fefefe;
-      font-family: monospace;
-    }
-    .layer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 2em;
-      line-height: 1.6;
-      padding: 2em;
-      pointer-events: none;
+      background: #ffffff;
+      color: #000000;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2em;
+      line-height: 1.6em;
+      overflow-wrap: break-word;
       white-space: pre-wrap;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .layer:nth-child(1) {
-      color: #111;
-      opacity: 0.6;
-      transform: translate(0, 0);
-    }
-    .layer:nth-child(2) {
-      color: crimson;
-      opacity: 0.3;
-      transform: translate(8px, -8px);
-    }
-    .layer:nth-child(3) {
-      color: royalblue;
-      opacity: 0.3;
-      transform: translate(-8px, 8px);
-    }
-    .layer:nth-child(4) {
-      color: darkgreen;
-      opacity: 0.2;
-      transform: rotate(1deg);
+
+    .contenido {
+      width: 90%;
+      height: 90%;
+      overflow: auto;
     }
   </style>
 </head>
 <body>
-  <div class="layer">yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado. este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan. ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles. de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril. pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de pajaritos</div>
-  <div class="layer">yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado. este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan. ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles. de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril. pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de pajaritos</div>
-  <div class="layer">yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado. este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan. ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles. de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril. pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de pajaritos</div>
-  <div class="layer">yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver. aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado. este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan. ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles. de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril. pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de pajaritos</div>
+  <div class="contenido">
+    yo ya explique en el otro mundo web que escribo frases que parecen que no tienen que ver.  
+    aaaaaaaaa. ha muerto. ha muerto. tengo tres fanzines arrugados y uno en perfecto estado.  
+    este texto es una prueba de visual. rellenando la página de letritas pero los códigos son raritos y no me dejan.  
+    ¿y tú con qué trabajas? con mayúsculas. BAILE AL SOL. el amor no tiene bandera. quetecalles.  
+    de monumento en monumento. son las seis de la tarde. deberia haber dormido la siesta. abril. abril. abril.  
+    pero buenoooooooo. ¿qué haces? que me digas. no me gusta mucho la actualización de spotify. cumbia de pajaritos  
+  </div>
 </body>
 </html>
