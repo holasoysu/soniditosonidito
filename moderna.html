@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>moderna</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      font-family: monospace;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: url('pelazo.JPG') no-repeat center center;
+      background-size: cover;
+    }
+
+    .palabra {
+      position: absolute;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 0.3em 0.6em;
+      border-radius: 4px;
+      font-size: 1em;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .zona {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    .zona:hover + .palabra {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="zona" style="top: 15%; left: 40%;"></div>
+    <div class="palabra" style="top: 15%; left: 40%;">ghosting</div>
+
+    <div class="zona" style="top: 30%; left: 70%;"></div>
+    <div class="palabra" style="top: 30%; left: 70%;">camiseta del País Vasco aunque seas madrileña</div>
+
+    <div class="zona" style="top: 55%; left: 25%;"></div>
+    <div class="palabra" style="top: 55%; left: 25%;">yo y mis amigas hacemos handpoke</div>
+
+    <div class="zona" style="top: 70%; left: 60%;"></div>
+    <div class="palabra" style="top: 70%; left: 60%;">iPhone cutrón para las llamadas</div>
+
+    <div class="zona" style="top: 80%; left: 15%;"></div>
+    <div class="palabra" style="top: 80%; left: 15%;">iPhone 16 para las fotitos</div>
+
+    <div class="zona" style="top: 40%; left: 50%;"></div>
+    <div class="palabra" style="top: 40%; left: 50%;">un pequeño leopardo</div>
+  </div>
+</body>
+</html>
