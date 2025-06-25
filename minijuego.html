@@ -2,95 +2,99 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Elige tu fondo</title>
+  <title>Minijuego Fondo</title>
   <style>
     body {
       font-family: monospace;
       text-align: center;
-      background: white;
       margin: 0;
       padding: 2rem;
     }
-    .pantalla {
-      display: none;
+    .opciones {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
     }
-    .activa {
-      display: block;
-    }
-    .opciones img, .opciones gif {
+    .opciones img {
       width: 200px;
-      margin: 1rem;
       cursor: pointer;
       border: 2px solid transparent;
     }
     .opciones img:hover {
-      border: 2px solid black;
-    }
-    #resultado img {
-      width: 33vw;
-      vertical-align: top;
+      border-color: black;
     }
   </style>
 </head>
 <body>
+
   <h1>Elige tu fondo de pantalla</h1>
 
-  <div id="pantalla1" class="pantalla activa">
-    <p>Elige un GIF:</p>
+  <div id="pregunta1">
+    <p>1. Elige un gif:</p>
     <div class="opciones">
-      <img src="horas.gif" onclick="seleccionar(1, 'horas.gif')">
-      <img src="teclado.gif" onclick="seleccionar(1, 'teclado.gif')">
-      <img src="calendario.gif" onclick="seleccionar(1, 'calendario.gif')">
+      <img src="horas.gif" onclick="seleccionar(1, this.src)">
+      <img src="teclado.gif" onclick="seleccionar(1, this.src)">
+      <img src="calendario.gif" onclick="seleccionar(1, this.src)">
     </div>
   </div>
 
-  <div id="pantalla2" class="pantalla">
-    <p>Elige una imagen:</p>
+  <div id="pregunta2" style="display:none;">
+    <p>2. Elige una imagen:</p>
     <div class="opciones">
-      <img src="PC090189.JPG" onclick="seleccionar(2, 'PC090189.JPG')">
-      <img src="PC090200.JPG" onclick="seleccionar(2, 'PC090200.JPG')">
-      <img src="PC300206.JPG" onclick="seleccionar(2, 'PC300206.JPG')">
+      <img src="PC090189.JPG" onclick="seleccionar(2, this.src)">
+      <img src="PC090200.JPG" onclick="seleccionar(2, this.src)">
+      <img src="PC300206.JPG" onclick="seleccionar(2, this.src)">
     </div>
   </div>
 
-  <div id="pantalla3" class="pantalla">
-    <p>Elige otra imagen:</p>
+  <div id="pregunta3" style="display:none;">
+    <p>3. Y una más:</p>
     <div class="opciones">
-      <img src="P7290031.JPG" onclick="seleccionar(3, 'P7290031.JPG')">
-      <img src="P7290038.JPG" onclick="seleccionar(3, 'P7290038.JPG')">
-      <img src="P6180519 2.JPG" onclick="seleccionar(3, 'P6180519 2.JPG')">
+      <img src="P7290031.JPG" onclick="seleccionar(3, this.src)">
+      <img src="P7290038.JPG" onclick="seleccionar(3, this.src)">
+      <img src="P6180519 2.JPG" onclick="seleccionar(3, this.src)">
     </div>
   </div>
 
-  <div id="pantallaFinal" class="pantalla">
-    <p>Tu fondo personalizado:</p>
-    <div id="resultado"></div>
+  <div id="resultado" style="display:none;">
+    <h2>Tu fondo personalizado:</h2>
+    <div style="position: relative; width: 100vw; height: 100vh; overflow: hidden;">
+      <img id="final1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+      <img id="final2" style="position: absolute; top: 10%; left: 10%; width: 25%; z-index: 2;">
+      <img id="final3" style="position: absolute; bottom: 10%; right: 10%; width: 30%; z-index: 3;">
+    </div>
   </div>
 
   <script>
-    const selecciones = [];
+    let seleccion1 = "";
+    let seleccion2 = "";
+    let seleccion3 = "";
 
-    function seleccionar(pantalla, archivo) {
-      selecciones[pantalla - 1] = archivo;
-      document.getElementById('pantalla' + pantalla).classList.remove('activa');
-      if (pantalla < 3) {
-        document.getElementById('pantalla' + (pantalla + 1)).classList.add('activa');
-      } else {
+    function seleccionar(pregunta, src) {
+      if (pregunta === 1) {
+        seleccion1 = src;
+        document.getElementById("pregunta1").style.display = "none";
+        document.getElementById("pregunta2").style.display = "block";
+      } else if (pregunta === 2) {
+        seleccion2 = src;
+        document.getElementById("pregunta2").style.display = "none";
+        document.getElementById("pregunta3").style.display = "block";
+      } else if (pregunta === 3) {
+        seleccion3 = src;
         mostrarResultado();
       }
     }
 
     function mostrarResultado() {
-      const resultado = document.getElementById('resultado');
-      resultado.innerHTML = '';
-      selecciones.forEach(archivo => {
-        const img = document.createElement('img');
-        img.src = archivo;
-        resultado.appendChild(img);
-      });
-      document.getElementById('pantallaFinal').classList.add('activa');
+      document.getElementById("pregunta3").style.display = "none";
+      document.getElementById("resultado").style.display = "block";
+      document.getElementById("final1").src = seleccion1;
+      document.getElementById("final2").src = seleccion2;
+      document.getElementById("final3").src = seleccion3;
     }
   </script>
+
 </body>
-</html>
- 
+</html> 
