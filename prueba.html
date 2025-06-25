@@ -4,36 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Texto loco texto loco</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: white;
-      color: black;
-      font-family: 'Courier New', monospace;
-      font-size: 1.2em;
-      line-height: 1em;
-      overflow: hidden;
-      position: relative;
-    }
+<style>
+  body {
+    margin: 0;
+    padding: 2rem;
+    font-family: Georgia, serif;
+    background-color: white;
+    color: black;
+  }
 
-    .repetido {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-    }
+  .capa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: pre-wrap;
+    opacity: 1; /* Sin transparencia */
+    pointer-events: none; /* Para que no bloquee enlaces */
+    font-size: 1rem;
+    transform: rotate(-2deg);
+    line-height: 1.5;
+    color: #333;
+  }
 
-    .capa {
-      position: absolute;
-      top: 0;
-      left: 0;
-      white-space: pre-wrap;
-      opacity: 0.5;
-    }
-   
+  .capa:nth-child(2) {
+    transform: translate(10px, 10px) rotate(1deg);
+    color: #555;
+  }
+
+  .capa:nth-child(3) {
+    transform: translate(-10px, 20px) rotate(-1deg);
+    color: #777;
+  }
+
+  .texto {
+    position: relative;
+    z-index: 2;
+    margin-top: 3rem;
+  }
+
+  a {
+    color: #0000aa;
+    text-decoration: underline dotted;
+    pointer-events: auto;
+  }
+  
   </style>
 </head>
 <body>
