@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Elige tu fondo</title>
+  <style>
+    body {
+      font-family: monospace;
+      text-align: center;
+      background: white;
+      margin: 0;
+      padding: 2rem;
+    }
+    .pantalla {
+      display: none;
+    }
+    .activa {
+      display: block;
+    }
+    .opciones img, .opciones gif {
+      width: 200px;
+      margin: 1rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .opciones img:hover {
+      border: 2px solid black;
+    }
+    #resultado img {
+      width: 33vw;
+      vertical-align: top;
+    }
+  </style>
+</head>
+<body>
+  <h1>Elige tu fondo de pantalla</h1>
+
+  <div id="pantalla1" class="pantalla activa">
+    <p>Elige un GIF:</p>
+    <div class="opciones">
+      <img src="horas.gif" onclick="seleccionar(1, 'horas.gif')">
+      <img src="teclado.gif" onclick="seleccionar(1, 'teclado.gif')">
+      <img src="calendario.gif" onclick="seleccionar(1, 'calendario.gif')">
+    </div>
+  </div>
+
+  <div id="pantalla2" class="pantalla">
+    <p>Elige una imagen:</p>
+    <div class="opciones">
+      <img src="PC090189.JPG" onclick="seleccionar(2, 'PC090189.JPG')">
+      <img src="PC090200.JPG" onclick="seleccionar(2, 'PC090200.JPG')">
+      <img src="PC300206.JPG" onclick="seleccionar(2, 'PC300206.JPG')">
+    </div>
+  </div>
+
+  <div id="pantalla3" class="pantalla">
+    <p>Elige otra imagen:</p>
+    <div class="opciones">
+      <img src="P7290031.JPG" onclick="seleccionar(3, 'P7290031.JPG')">
+      <img src="P7290038.JPG" onclick="seleccionar(3, 'P7290038.JPG')">
+      <img src="P6180519 2.JPG" onclick="seleccionar(3, 'P6180519 2.JPG')">
+    </div>
+  </div>
+
+  <div id="pantallaFinal" class="pantalla">
+    <p>Tu fondo personalizado:</p>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const selecciones = [];
+
+    function seleccionar(pantalla, archivo) {
+      selecciones[pantalla - 1] = archivo;
+      document.getElementById('pantalla' + pantalla).classList.remove('activa');
+      if (pantalla < 3) {
+        document.getElementById('pantalla' + (pantalla + 1)).classList.add('activa');
+      } else {
+        mostrarResultado();
+      }
+    }
+
+    function mostrarResultado() {
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = '';
+      selecciones.forEach(archivo => {
+        const img = document.createElement('img');
+        img.src = archivo;
+        resultado.appendChild(img);
+      });
+      document.getElementById('pantallaFinal').classList.add('activa');
+    }
+  </script>
+</body>
+</html>
+ 
