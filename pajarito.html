@@ -4,31 +4,34 @@
   <meta charset="UTF-8">
   <title>pajarito</title>
   <style>
-    body {
-      background: #fdfdfd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <body style="background-color: white; text-align: center; padding-top: 3rem;">
 
-    svg {
-      width: 200px;
-      height: auto;
-    }
+  <h2 style="font-family: monospace;">el pajarito apareció</h2>
 
-    .ala {
-      transform-origin: center;
-      animation: aleteo 2s infinite ease-in-out;
-    }
+  <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+    <!-- cuerpo -->
+    <ellipse cx="100" cy="90" rx="40" ry="30" fill="#fcbf49" />
+    
+    <!-- cabeza -->
+    <circle cx="130" cy="70" r="20" fill="#fcbf49" />
+    
+    <!-- ojo -->
+    <circle cx="135" cy="65" r="3" fill="#000" />
+    
+    <!-- pico -->
+    <polygon points="150,70 140,75 140,65" fill="#e07a5f" />
+    
+    <!-- ala -->
+    <ellipse cx="90" cy="90" rx="15" ry="10" fill="#f77f00" />
+    
+    <!-- patitas -->
+    <line x1="85" y1="115" x2="80" y2="125" stroke="#000" stroke-width="2" />
+    <line x1="115" y1="115" x2="120" y2="125" stroke="#000" stroke-width="2" />
+  </svg>
 
-    @keyframes aleteo {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(-10deg); }
-    }
-  </style>
-</head>
-<body>
+  <p style="font-family: monospace; margin-top: 2rem;">dice: <i>pío pío</i> desde el archivo queer</p>
+
+</body>
 
 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <!-- cuerpo -->
